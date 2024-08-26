@@ -1,0 +1,9 @@
+application:
+  security:
+    jwt:
+      secret-key: 586B633834416E396D7436753879382F423F4428482B4C6250655367566B5970
+      expiration: 50000000 # 5 secs( passed in milSec)
+      cookie-name: jwt-cookie
+      refresh-token:
+        expiration: 300000000 # 3 secs( passed in milSec)
+        cookie-name: refresh-jwt-cookie

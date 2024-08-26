@@ -1,0 +1,447 @@
+{
+	"info": {
+		"_postman_id": "af0f2f0f-7fc9-4443-9102-f84c2fc7f76f",
+		"name": "rally-route",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7443795"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonBody = pm.response.json();\r",
+							"pm.environment.set('token', jsonBody.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"a@gmail.com\",\r\n    \"password\": \"Its@22222simple\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{env-prod}}:8080/api/v1/auth/authenticate",
+					"host": [
+						"{{env-prod}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"a@gmail.com\",\r\n    \"password\": \"Its@22222simple\",\r\n    \"firstname\": \"raj\",\r\n    \"lastname\": \"rahul\",\r\n    \"role\": \"USER\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{env-prod}}:8080/api/v1/auth/register",
+					"host": [
+						"{{env-prod}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"a1@gmail.com\",\r\n    \"password\": \"Its@imple\",\r\n    \"firstname\": \"raj1\",\r\n    \"lastname\": \"rahul1\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{env-prod}}:8080/api/v1/resource/users",
+					"host": [
+						"{{env-prod}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"resource",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env-prod}}:8080/api/v1/resource/users",
+					"host": [
+						"{{env-prod}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"resource",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProfileImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env-prod}}:8080/api/v1/resource/users/profile/image",
+					"host": [
+						"{{env-prod}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"resource",
+						"users",
+						"profile",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProfileImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/aarfi/Desktop/test.JPG"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{env-prod}}:8080/api/v1/resource/users/profile/image",
+					"host": [
+						"{{env-prod}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"resource",
+						"users",
+						"profile",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{env-prod}}:8080/api/v1/auth/logout",
+					"host": [
+						"{{env-prod}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCountryList",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env-prod}}:8080/api/v1/resource/clubs/country/india",
+					"host": [
+						"{{env-prod}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"resource",
+						"clubs",
+						"country",
+						"india"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getStateByCountry",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/resource/clubs/country/india",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"resource",
+						"clubs",
+						"country",
+						"india"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCity",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env-prod}}:8080/api/v1/resource/clubs/country/india/state/uttarPradesh",
+					"host": [
+						"{{env-prod}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"resource",
+						"clubs",
+						"country",
+						"india",
+						"state",
+						"uttarPradesh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getClub",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env-prod}}:8080/api/v1/resource/clubs?city=Noida&country=India&state=UttarPradesh&latitude=28.620220973560592&longitude=77.4370045319497",
+					"host": [
+						"{{env-prod}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"resource",
+						"clubs"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Noida"
+						},
+						{
+							"key": "country",
+							"value": "India"
+						},
+						{
+							"key": "state",
+							"value": "UttarPradesh"
+						},
+						{
+							"key": "latitude",
+							"value": "28.620220973560592"
+						},
+						{
+							"key": "longitude",
+							"value": "77.4370045319497"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateClubImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/aarfi/Desktop/test.JPG"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{env-prod}}:8080/api/v1/resource/clubs/image/1",
+					"host": [
+						"{{env-prod}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"resource",
+						"clubs",
+						"image",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

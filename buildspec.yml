@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Build started on `date`
+      - cd Parent
+      - mvn clean install
+      - cp target/rally-root-1.jar /tmp/rally-root-1.jar
+      - cd $CODEBUILD_SRC_DIR
+      - cp Dockerfile-env $CODEBUILD_SRC_DIR/DocumentService/target/Dockerfile
+      - cd $CODEBUILD_SRC_DIR/DocumentService/target
+      - docker build -t document-service .
+  post_build:
+    commands:
+      - eval `aws ecr get-login --region eu-west-2 --no-include-email`
+      - IMAGE_TAG="1"
+      - REPOSITORY_URI=471112551283.dkr.ecr.us-east-2.amazonaws.com/rally-root-registry
+      - docker tag rally-root:latest 913536217213.dkr.ecr.eu-west-2.amazonaws.com/docker-document-service:1.1.36
+      - docker push 71112551283.dkr.ecr.us-east-2.amazonaws.com/rally-root-registry:1
+      - echo $CODEBUILD_SRC_DIR
+      - cd $CODEBUILD_SRC_DIR/rally-root/target
+      - printf '[{"name":"rally-root","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+artifacts:
+  files:
+    - DocumentService/target/*.jar
+    - DocumentService/target/imagedefinitions.json
